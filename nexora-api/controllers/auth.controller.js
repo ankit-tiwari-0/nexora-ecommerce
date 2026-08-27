@@ -1,4 +1,4 @@
-import generateToken, { storeRefreshToken } from "../middleware.js/generateToken.js"
+import generateToken, { setCookies, storeRefreshToken } from "../middleware.js/generateToken.js"
 import { user } from "../models/user.model.js"
 
 export const singup = async (req, res) => {
@@ -18,8 +18,14 @@ export const singup = async (req, res) => {
     const { accessToken, refreshToken}= generateToken(user._id);
     await storeRefreshToken(user._id,refreshToken)
 
+    setCookies(res, accessToken, refreshToken)
+
     return res.status(200).json({
-        newuser, message:"user created successfully"
+        newuser: {
+            _id: newuser._id,
+            name:newuser.name,
+            email: newuser.email
+        }, message:"user created successfully"
     }) 
    } catch (error) {
     res.status(500).json({message:error.message})
