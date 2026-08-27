@@ -1,4 +1,5 @@
 import { redis } from "../lib/redis.js"
+import jwt from "jsonwebtoken"
 import generateToken, { setCookies, storeRefreshToken } from "../middleware.js/generateToken.js"
 import { user } from "../models/user.model.js"
 
@@ -16,8 +17,8 @@ export const singup = async (req, res) => {
 
     const newuser = await user.create({name,email,password});
 //authentication
-    const { accessToken, refreshToken}= generateToken(user._id);
-    await storeRefreshToken(user._id,refreshToken)
+    const { accessToken, refreshToken}= generateToken(newuser._id);
+    await storeRefreshToken(newuser._id,refreshToken)
 
     setCookies(res, accessToken, refreshToken)
 
@@ -34,19 +35,42 @@ export const singup = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-    res.send("ok")
+  try {
+    const {email, password} = req.body;
+    const newuser = await user.findOne({email})
+
+    if(newuser && (await newuser.comparePassword(password))){
+        const {accessToken, refreshToken} = generateToken(newuser._id)
+
+        await storeRefreshToken(newuser._id, refreshToken);
+        setCookies(res, accessToken, refreshToken)
+
+        return res.json({
+        _id: newuser._id,
+        Nme: newuser.name,
+        email: newuser.email,
+        message:"login"
+    })
+    }
+
+    return res.status(401).json({
+        message: "Invalid credencial"
+    })
+  } catch (error) {
+    res.status(500).json({message: error.message})
+  }
 }
 
 export const logout = async (req, res) => {
     try {
-        const refreshToken = req.cookies.refreshToken;
+        const refreshToken = req.cookies.refToken;
         if(refreshToken){
             const decode = jwt.verify(refreshToken, process.env.REFRESHTOKEN);
             await redis.del(`refresh_token:${decode.USERiD}`)
         }
 
         res.clearCookie("accessToken")
-        res.clearCookie("refreshToken")
+        res.clearCookie("refToken")
         res.json({message: "Logged out successfully"})
     } catch (error) {
         res.status(500).json({message: "sever error", error: error.message})
