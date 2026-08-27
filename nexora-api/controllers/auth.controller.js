@@ -1,4 +1,4 @@
-import generateToken from "../middleware.js/generateToken.js"
+import generateToken, { storeRefreshToken } from "../middleware.js/generateToken.js"
 import { user } from "../models/user.model.js"
 
 export const singup = async (req, res) => {
@@ -14,8 +14,9 @@ export const singup = async (req, res) => {
     }
 
     const newuser = await user.create({name,email,password});
-
-    const { accessToken, refreshToken}= generateToken(user._id)
+//authentication
+    const { accessToken, refreshToken}= generateToken(user._id);
+    await storeRefreshToken(user._id,refreshToken)
 
     return res.status(200).json({
         newuser, message:"user created successfully"

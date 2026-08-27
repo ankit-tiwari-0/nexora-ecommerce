@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken"
+import { redis } from "../lib/redis.js "
 
 const generateToken = (USERiD)=>{
 const accessToken = jwt.sign({USERiD}, process.env.ACCESSTOKEN,{
@@ -12,3 +13,8 @@ return {accessToken, refreshToken}
 }
 
 export default generateToken
+
+export const storeRefreshToken = async(USERiD,refreshToken)=>{
+    await redis.set(`refresh_token:${USERiD}`, refreshToken, "EX",7*24*60*60)
+}
+
