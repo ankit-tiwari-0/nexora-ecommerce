@@ -49,6 +49,7 @@ export const login = async (req, res) => {
         _id: newuser._id,
         Nme: newuser.name,
         email: newuser.email,
+        role: newuser.role,
         message:"login"
     })
     }
