@@ -32,3 +32,7 @@ export const  getFeaturedProduct = async (req, res) => {
 
     }
 }
+
+export const  createProduct = async(req, res) =>{
+    
+}
