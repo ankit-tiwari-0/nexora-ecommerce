@@ -14,7 +14,7 @@ app.use(json())
 app.use(cookieParser())
 
 app.use("/api/auth", Authroute)
-app.use("/api/product", productRoute)
+app.use("/api/product", productRoute   )
 
 
 
