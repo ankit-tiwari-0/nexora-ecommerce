@@ -6,6 +6,7 @@ const productRoute = Router()
 
 productRoute.get("/",protectRoute,adminRoute, getAllproduct)
 productRoute.get("/featured", getFeaturedProduct)
+productRoute.get("/recomment", getrecommendedProduct)
 productRoute.post("/", protectRoute, adminRoute, createProduct)
 productRoute.delete("/:id", protectRoute,adminRoute, deleteProduct)
 
