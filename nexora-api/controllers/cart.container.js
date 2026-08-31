@@ -1,3 +1,4 @@
+import PRODUCT from "../models/product.model.js"
 export const addcart = async (req, res) => {
     try {
         const { productId } = req.body;
@@ -17,6 +18,18 @@ export const addcart = async (req, res) => {
 }
 export const getcartproduct = async (req, res) => {
 
+  try {
+    const product = PRODUCT.find({_id:{$in:req.user.cartItem}})
+
+    const cardItem = product.map(product => {
+        const item = req.user.cartItem.find(cartItem => cardItem.id === product.id);
+        return {...product.toJSON(), quantity:item.quantity}
+    })
+
+    res.json(cardItem)
+  } catch (error) {
+        res.status(500).json({message: error.message})
+  }
 }
 export const removeAllFromcart = async (req, res) => {
     try {
