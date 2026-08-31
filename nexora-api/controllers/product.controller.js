@@ -139,3 +139,29 @@ export const getcategory = async(req,res)=>{
         res.status(500).json({message: error.message})
  }
 }
+
+export const toggelFeatureProduct = async(req,res)=>{
+
+    try {
+        const product = await PRODUCT.findById(req.params.id);
+        if (product) {
+            product.isFeatured = !product.isFeatured;
+            const updateProduct = await product.save();
+            await updateFeaturedProduct();
+            res.json(updateProduct)
+        }else {
+            res.status(404).json({ message: "Product not found"})
+        }
+    } catch (error) {
+            res.status(500).json({message: error.message})
+    }
+}
+
+async function updateFeaturedProduct() {
+    try {
+        const featuredProducts = await PRODUCT.find({ isFeatured: true}).lean();
+        await redis.set("featured_product", JSON.stringify(featuredProducts))
+    } catch (error) {
+            res.status(500).json({message: error.message})
+    }
+}
