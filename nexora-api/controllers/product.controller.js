@@ -66,3 +66,40 @@ export const  createProduct = async(req, res) =>{
             res.status(500).json({message: error.message})
     }
 }
+
+export const deleteProduct = async (req, res) => {
+    try {
+        const product = await PRODUCT.findById(req.params.id);
+
+        if (!product) {
+            return res.status(404).json({
+                message: "Product not found"
+            });
+        }
+
+        // Delete image from ImageKit
+        if (product.image) {
+            const fileName = product.image.split("/").pop();
+
+            const files = await imageKit.assets.list({
+                searchQuery: `name="${fileName}"`
+            });
+
+            if (files.length > 0) {
+                await imageKit.files.delete(files[0].fileId);
+            }
+        }
+
+        // Delete product from MongoDB
+        await PRODUCT.findByIdAndDelete(req.params.id);
+
+        return res.status(200).json({
+            message: "Product and image deleted successfully"
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
