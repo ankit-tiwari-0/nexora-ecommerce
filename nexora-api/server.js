@@ -5,6 +5,7 @@ import { ConnectDB } from "./lib/db.js"
 import cookieParser from "cookie-parser"
 import productRoute from "./routes/product.route.js"
 import cartRoute from "./routes/cart.route.js"
+import { coupon } from "./models/coupon.model.js"
 
 
 dotenv.config()
@@ -17,6 +18,7 @@ app.use(cookieParser())
 app.use("/api/auth", Authroute)
 app.use("/api/product", productRoute   )
 app.use("/api/cart", cartRoute  )
+app.use("/api/coupon", coupon  )
 
 
 app.listen(PORT, ()=>{
