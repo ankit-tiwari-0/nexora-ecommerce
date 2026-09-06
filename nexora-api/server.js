@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser"
 import productRoute from "./routes/product.route.js"
 import cartRoute from "./routes/cart.route.js"  
 import coupon_router from "./routes/coupon.route.js"
+import PAYMENT from "./routes/payment.route.js"
 
 
 dotenv.config()
@@ -19,6 +20,7 @@ app.use("/api/auth", Authroute)
 app.use("/api/product", productRoute   )
 app.use("/api/cart", cartRoute  )
 app.use("/api/coupon", coupon_router  )
+app.use("/api/coupon", PAYMENT )
 
 
 app.listen(PORT, ()=>{
