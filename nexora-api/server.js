@@ -20,7 +20,7 @@ app.use("/api/auth", Authroute)
 app.use("/api/product", productRoute   )
 app.use("/api/cart", cartRoute  )
 app.use("/api/coupon", coupon_router  )
-app.use("/api/coupon", PAYMENT )
+app.use("/api/pay", PAYMENT )
 
 
 app.listen(PORT, ()=>{
