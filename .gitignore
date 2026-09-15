@@ -157,3 +157,53 @@ bower_components
 psd
 thumb
 sketch
+
+### React / Frontend ###
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Build output
+dist/
+build/
+out/
+
+# React Native
+.expo/
+.expo-shared/
+
+# Testing
+coverage/
+*.lcov
+
+# Environment variables
+.env
+.env.*
+*.local
+
+# IDE/editor files
+.vscode/
+.idea/
+*.sublime*
+*.swp
+
+# Temporary files
+*.tmp
+*.temp
+*.backup.*
+*.back.*
+
+# Assets
+*.psd
+*.sketch
+*.thumb
+
