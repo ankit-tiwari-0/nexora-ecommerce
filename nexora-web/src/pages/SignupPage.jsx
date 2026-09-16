@@ -18,14 +18,14 @@ const SignupPage = () => {
 
   }
   return (
-    <div className='flex flex-col justify-center py-12 sm:px-6 lg:px-8'>
+    <div className="flex flex-col justify-center py-5 sm:py-8 lg:py-12 sm:px-6 lg:px-8">
       <motion.div
         className='sm:mx-auto sm:w-full sm:max-w-md'
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 2, y: 0 }}
         transition={{ duration: 1 }}
       >
-        <h2 className='mt-6 text-center text-3xl font-extrabold text-emerald-400'>CReate ACcount</h2>
+        <h2 className='mt-3 lg:mt-7 sm:mt-3 text-center lg:text-3xl sm:text-xl text-2xl  font-extrabold text-emerald-500'>CReate ACcount</h2>
       </motion.div>
 
       <motion.div
@@ -34,7 +34,7 @@ const SignupPage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.2 }}
       >
-        <div className='bg-gray-700 py-8 px-4 shadow sm:rounded-lg sm:px-10 mx-3 rounded-3xl'>
+        <div className='bg-gray-700 py-6 lg:py-9 sm:py-4 px-4 shadow sm:rounded-lg sm:px-10 mx-3.5 lg:mx-0.5 sm:mx-3 rounded-3xl'>
           <form onSubmit={handleSubmit} className='space-y-6'>
             <div>
               <label htmlFor='name' className='block text-sm font-medium text-gray-300'>
