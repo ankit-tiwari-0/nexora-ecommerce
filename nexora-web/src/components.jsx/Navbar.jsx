@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { ShoppingCart, UserPlus, LogIn, LogOut, Lock } from 'lucide-react'
 
 const Navbar = () => {
-    const user = true
+    const user = false
     const cart = []
     const isAdmin = true
 
