@@ -1,71 +1,72 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
 import {
+    Home,
     ShoppingCart,
     UserPlus,
     LogIn,
     LogOut,
-    Lock,
-    Menu,
-    X,
-} from "lucide-react";
+    Lock
+} from 'lucide-react'
 
 const Navbar = () => {
-    const user = false;
-    const cart = [];
-    const isAdmin = true;
-
-    const [menuOpen, setMenuOpen] = useState(false);
+    const user = false
+    const cart = []
+    const isAdmin = true
 
     const logout = () => {
-        console.log("Logout clicked");
-        setMenuOpen(false);
-    };
-
-    const closeMenu = () => {
-        setMenuOpen(false);
-    };
+        console.log('Logout clicked')
+    }
 
     return (
-        <header className="fixed top-0 left-0 w-full z-40 bg-gray-900/95 backdrop-blur-md border-b border-emerald-800 shadow-lg">
-            
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                
-                <div className="h-16 flex items-center justify-between">
+        <header
+            className='fixed top-0 left-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-md
+            shadow-lg z-40 transition-all duration-300 border-b border-emerald-800 rounded-xl'
+        >
+            <div className='container mx-auto px-3 sm:px-4 py-3'>
+                <div className='flex justify-between items-center'>
 
                     {/* Logo */}
                     <Link
-                        to="/"
-                        className="text-2xl sm:text-3xl font-bold text-emerald-400"
+                        to='/'
+                        className='text-xl sm:text-2xl font-bold text-emerald-400 flex items-center'
                     >
                         Nexora
                     </Link>
 
-                    {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center gap-3 lg:gap-5">
+                    {/* Navigation */}
+                    <nav className='flex items-center gap-4'>
 
                         {/* Home */}
                         <Link
-                            to="/"
-                            className="text-gray-200 hover:text-emerald-400 transition"
+                            to='/'
+                            className='flex items-center text-gray-300 hover:text-emerald-400
+                            transition duration-300 ease-in-out font-medium'
                         >
-                            Home
+                            <Home size={24} />
                         </Link>
 
                         {/* Cart */}
                         {user && (
                             <Link
-                                to="/cart"
-                                className="relative flex items-center text-gray-300 hover:text-emerald-400 transition"
+                                to='/cart'
+                                className='relative group text-gray-300 hover:text-emerald-400
+                                transition duration-300 ease-in-out flex items-center'
                             >
-                                <ShoppingCart size={21} />
+                                <ShoppingCart
+                                    size={18}
+                                    className='group-hover:text-emerald-400'
+                                />
 
-                                <span className="ml-1">
+                                <span className='hidden sm:inline ml-1'>
                                     Cart
                                 </span>
 
                                 {cart.length > 0 && (
-                                    <span className="absolute -top-2 -right-3 bg-emerald-500 text-white rounded-full px-1.5 py-0.5 text-xs">
+                                    <span
+                                        className='absolute -top-2 -left-2 bg-emerald-500 text-white
+                                        rounded-full px-2 py-0.5 text-xs'
+                                    >
                                         {cart.length}
                                     </span>
                                 )}
@@ -75,163 +76,76 @@ const Navbar = () => {
                         {/* Admin Dashboard */}
                         {isAdmin && (
                             <Link
-                                to="/secret-dashboard"
-                                className="bg-emerald-700 hover:bg-emerald-600 text-white px-3 py-2 rounded-md flex items-center transition"
+                                to='/secret-dashboard'
+                                className='bg-emerald-700 hover:bg-emerald-600 text-white
+                                px-2 sm:px-3 py-2 rounded-md font-medium
+                                transition duration-300 ease-in-out flex items-center'
                             >
-                                <Lock size={18} />
-                                <span className="ml-1">
+                                <Lock size={16} />
+
+                                <span className='hidden sm:inline ml-1'>
                                     Dashboard
                                 </span>
                             </Link>
                         )}
 
-                        {/* Login / Signup / Logout */}
+                        {/* Logout / Signup + Login */}
                         {user ? (
                             <button
+                                className='bg-gray-700 hover:bg-gray-600 text-white
+                                py-2 px-2 sm:px-4 rounded-md flex items-center
+                                transition duration-300 ease-in-out'
                                 onClick={logout}
-                                className="bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-md flex items-center transition"
                             >
                                 <LogOut size={18} />
-                                <span className="ml-2">
-                                    Logout
+
+                                <span className='hidden sm:inline ml-2'>
+                                    Log Out
                                 </span>
                             </button>
                         ) : (
                             <>
+                                {/* Sign Up */}
                                 <Link
-                                    to="/signup"
-                                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-2 rounded-md flex items-center transition"
+                                    to='/signup'
+                                    className='bg-emerald-600 hover:bg-emerald-700 text-white
+                                    py-1 px-1 lg:py-2 lg:px-2 sm:px-4  rounded-md flex items-center
+                                    transition duration-300 ease-in-out'
                                 >
-                                    <UserPlus size={18} />
-                                    <span className="ml-1">
+                                    <UserPlus
+                                        className='mr-1 sm:mr-2'
+                                        size={18}
+                                    />
+
+                                    <span>
                                         Sign Up
                                     </span>
                                 </Link>
 
+                                {/* Login */}
                                 <Link
-                                    to="/login"
-                                    className="bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-md flex items-center transition"
+                                    to='/login'
+                                    className='bg-gray-700 hover:bg-gray-600 text-white
+                                    py-1 px-1 lg:py-2 lg:px-2 sm:px-4  rounded-md flex items-center
+                                    transition duration-300 ease-in-out'
                                 >
-                                    <LogIn size={18} />
-                                    <span className="ml-1">
+                                    <LogIn
+                                        className='mr-1 sm:mr-2'
+                                        size={18}
+                                    />
+
+                                    <span>
                                         Login
                                     </span>
                                 </Link>
                             </>
                         )}
-                    </nav>
 
-                    {/* Mobile Menu Button */}
-                    <button
-                        onClick={() => setMenuOpen(!menuOpen)}
-                        className="md:hidden text-gray-200 p-2 rounded-md hover:bg-gray-800 transition"
-                    >
-                        {menuOpen ? (
-                            <X size={28} />
-                        ) : (
-                            <Menu size={28} />
-                        )}
-                    </button>
+                    </nav>
                 </div>
-
-                {/* Mobile Navigation */}
-                {menuOpen && (
-                    <nav className="md:hidden border-t border-gray-700 py-4">
-
-                        <div className="flex flex-col gap-2">
-
-                            {/* Home */}
-                            <Link
-                                to="/"
-                                onClick={closeMenu}
-                                className="text-gray-200 hover:bg-gray-800 hover:text-emerald-400 px-3 py-3 rounded-md transition"
-                            >
-                                Home
-                            </Link>
-
-                            {/* Cart */}
-                            {user && (
-                                <Link
-                                    to="/cart"
-                                    onClick={closeMenu}
-                                    className="flex items-center text-gray-200 hover:bg-gray-800 hover:text-emerald-400 px-3 py-3 rounded-md transition"
-                                >
-                                    <ShoppingCart size={20} />
-
-                                    <span className="ml-2">
-                                        Cart
-                                    </span>
-
-                                    {cart.length > 0 && (
-                                        <span className="ml-2 bg-emerald-500 text-white rounded-full px-2 py-0.5 text-xs">
-                                            {cart.length}
-                                        </span>
-                                    )}
-                                </Link>
-                            )}
-
-                            {/* Admin */}
-                            {isAdmin && (
-                                <Link
-                                    to="/secret-dashboard"
-                                    onClick={closeMenu}
-                                    className="flex items-center bg-emerald-700 hover:bg-emerald-600 text-white px-3 py-3 rounded-md transition"
-                                >
-                                    <Lock size={19} />
-
-                                    <span className="ml-2">
-                                        Dashboard
-                                    </span>
-                                </Link>
-                            )}
-
-                            {/* Logout */}
-                            {user ? (
-                                <button
-                                    onClick={logout}
-                                    className="w-full bg-gray-700 hover:bg-gray-600 text-white px-3 py-3 rounded-md flex items-center transition"
-                                >
-                                    <LogOut size={19} />
-
-                                    <span className="ml-2">
-                                        Logout
-                                    </span>
-                                </button>
-                            ) : (
-                                <>
-                                    {/* Signup */}
-                                    <Link
-                                        to="/signup"
-                                        onClick={closeMenu}
-                                        className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-3 rounded-md flex items-center transition"
-                                    >
-                                        <UserPlus size={19} />
-
-                                        <span className="ml-2">
-                                            Sign Up
-                                        </span>
-                                    </Link>
-
-                                    {/* Login */}
-                                    <Link
-                                        to="/login"
-                                        onClick={closeMenu}
-                                        className="bg-gray-700 hover:bg-gray-600 text-white px-3 py-3 rounded-md flex items-center transition"
-                                    >
-                                        <LogIn size={19} />
-
-                                        <span className="ml-2">
-                                            Login
-                                        </span>
-                                    </Link>
-                                </>
-                            )}
-                        </div>
-                    </nav>
-                )}
             </div>
         </header>
-    );
-};
+    )
+}
 
-export default Navbar;
+export default Navbar
