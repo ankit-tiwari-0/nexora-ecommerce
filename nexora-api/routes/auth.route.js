@@ -8,7 +8,7 @@ route.post("/signup", singup)
 
 route.post("/login", login)
 
-route.get("/logout", logout)
+route.post("/logout", logout)
 
 route.post("/refresh", refreshtoken)
 
