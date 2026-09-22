@@ -30,8 +30,6 @@ export const useUserStore = create((set) => ({
             toast.success("Account created successfully!");
 
         } catch (error) {
-            console.error("Signup error:", error);
-
             set({ loading: false });
 
             toast.error(
@@ -39,5 +37,6 @@ export const useUserStore = create((set) => ({
                 "An error occurred"
             );
         }
-    }
+    },
+    
 }));

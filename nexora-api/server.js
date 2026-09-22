@@ -7,10 +7,18 @@ import productRoute from "./routes/product.route.js"
 import cartRoute from "./routes/cart.route.js"  
 import coupon_router from "./routes/coupon.route.js"
 import PAYMENT from "./routes/payment.route.js"
+import cors from "cors"
 
 
 dotenv.config()
 const app = express()
+// CORS configuration
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+        credentials: true,
+    })
+);
 const PORT = process.env.PORT|| 5000
 
 app.use(json())
