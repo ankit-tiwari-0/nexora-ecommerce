@@ -1,12 +1,19 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import SignupPage from './pages/SignupPage'
 import LoginPage from './pages/loginPage'
 import Navbar from './components.jsx/Navbar'
 import { Toaster } from 'react-hot-toast'
+import { useUserStore } from './stores/useUserstore.js'
 
 const App = () => {
+  const {user, checkAuth} = useUserStore();
+   
+  useEffect( () => {
+    checkAuth()
+  }, [ checkAuth])
+
   return (
     <div className='min-h-screen bg-gray-900 text-white relative overflow-hidden rounded-2xl'>
       <div className='absolute inset-0 overflow-hidden'>
@@ -19,8 +26,8 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/signup' element={<SignupPage />} />
-        <Route path='/login' element={<LoginPage />} />
+        <Route path='/signup' element={!user ? <SignupPage /> : <Navigate to='/' />} />
+        <Route path='/login' element={!user ? <LoginPage /> : <Navigate to='/' />} />
       </Routes>
       </div>
       <Toaster />

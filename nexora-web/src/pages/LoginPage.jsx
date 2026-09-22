@@ -39,7 +39,7 @@ const LoginPage = () => {
         transition={{ duration: 0.8 }}
       >
         <h2 className="mt-6 text-center text-3xl font-extrabold text-emerald-400">
-          Login to your account
+          Welcome back!
         </h2>
       </motion.div>
 
