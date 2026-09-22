@@ -38,5 +38,17 @@ export const useUserStore = create((set) => ({
             );
         }
     },
+    login: async (email, password) => {
+            set({ loading: true });
     
+            try {
+                const res = await axios.post("/auth/login", { email, password });
+    
+                set({ user: res.data, loading: false });
+                toast.success("Welcome back, boss! 😎 Login ho gaya 🎉");
+            } catch (error) {
+                set({ loading: false });
+                toast.error(error.response.data.message || "An error occurred");
+            }
+        },
 }));
