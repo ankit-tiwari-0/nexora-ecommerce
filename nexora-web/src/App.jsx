@@ -6,13 +6,16 @@ import LoginPage from './pages/loginPage'
 import Navbar from './components.jsx/Navbar'
 import { Toaster } from 'react-hot-toast'
 import { useUserStore } from './stores/useUserstore.js'
+import LoadingSpinner from './components.jsx/loadingspinner.jsx'
 
 const App = () => {
-  const {user, checkAuth} = useUserStore();
+  const {user, checkAuth, checkingAuth} = useUserStore();
    
   useEffect( () => {
     checkAuth()
-  }, [ checkAuth])
+  }, [ checkAuth]);
+
+  if (checkingAuth) return <LoadingSpinner /> 
 
   return (
     <div className='min-h-screen bg-gray-900 text-white relative overflow-hidden rounded-2xl'>
