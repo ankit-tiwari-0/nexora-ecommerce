@@ -135,18 +135,28 @@ export const getrecommendedProduct = async(req,res)=>{
     }
 }
 
-export const getcategory = async(req,res)=>{
- const {category} = req.params;
- try {
-    
-    const product = await PRODUCT.find({category})
-    res.json({category})
- } catch (error) {
-        console.log(error.message); 
-        res.status(500).json({message: error.message})
- }
-}
+export const getcategory = async (req, res) => {
+  const { category } = req.params;
 
+  try {
+    const products = await PRODUCT.find({
+      category: {
+        $regex: `^${category}$`,
+        $options: "i",
+      },
+    });
+
+    return res.status(200).json({
+      products,
+    });
+  } catch (error) {
+    console.log("Get category products error:", error.message);
+
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
 export const toggelFeatureProduct = async(req,res)=>{
 
     try {

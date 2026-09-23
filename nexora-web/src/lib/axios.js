@@ -1,59 +1,50 @@
+
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "http://localhost:5000/api",
-    withCredentials: true,
-    timeout: 9000, // 4 seconds
+  baseURL: "http://localhost:5000/api",
+  withCredentials: true,
+  timeout: 9000,
 });
 
-// export default axiosInstance;
+let isRefreshing = false;
+let refreshPromise = null;
 
-// import axios from "axios";
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
 
-// const axiosInstance = axios.create({
-//   baseURL: "http://localhost:5000/api",
-//   withCredentials: true,
-//   timeout: 9000,
-// });
+  async (error) => {
+    const originalRequest = error.config;
 
-// let isRefreshing = false;
-// let refreshPromise = null;
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      !originalRequest.url?.includes("/auth/refresh")
+    ) {
+      originalRequest._retry = true;
 
-// axiosInstance.interceptors.response.use(
-//   (response) => {
-//     return response;
-//   },
+      try {
+        if (!isRefreshing) {
+          isRefreshing = true;
 
-//   async (error) => {
-//     const originalRequest = error.config;
+          refreshPromise = axiosInstance.post("/auth/refresh");
+        }
 
-//     if (
-//       error.response?.status === 401 &&
-//       !originalRequest._retry &&
-//       !originalRequest.url?.includes("/auth/refresh")
-//     ) {
-//       originalRequest._retry = true;
+        await refreshPromise;
 
-//       try {
-//         if (!isRefreshing) {
-//           isRefreshing = true;
+        return axiosInstance(originalRequest);
+      } catch (refreshError) {
+        return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
+        refreshPromise = null;
+      }
+    }
 
-//           refreshPromise = axiosInstance.post("/auth/refresh");
-//         }
+    return Promise.reject(error);
+  }
+);
 
-//         await refreshPromise;
-
-//         return axiosInstance(originalRequest);
-//       } catch (refreshError) {
-//         return Promise.reject(refreshError);
-//       } finally {
-//         isRefreshing = false;
-//         refreshPromise = null;
-//       }
-//     }
-
-//     return Promise.reject(error);
-//   }
-// );
-
-// export default axiosInstance;
+export default axiosInstance;

@@ -7,7 +7,7 @@ const productRoute = Router()
 productRoute.get("/",protectRoute,adminRoute, getAllproduct)
 productRoute.get("/featured", getFeaturedProduct)
 productRoute.get("/recomment", getrecommendedProduct)
-productRoute.get("/getcategory/:category", getcategory)
+productRoute.get("/category/:category", getcategory);
 productRoute.post("/", protectRoute, adminRoute, createProduct)
 productRoute.delete("/:id", protectRoute,adminRoute, deleteProduct)
 productRoute.patch("/:id", protectRoute,adminRoute, toggelFeatureProduct)

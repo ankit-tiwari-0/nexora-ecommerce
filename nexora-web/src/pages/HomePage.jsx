@@ -1,9 +1,10 @@
-
 import React from "react";
+import { Link } from "react-router-dom";
+
+import { useProductStore } from "../stores/useProductStore";
 
 // import { useEffect } from "react";
 // import CategoryItem from "../components/CategoryItem";
-// import { useProductStore } from "../stores/useProductStore";
 // import FeaturedProducts from "../components/FeaturedProducts";
 
 const categories = [
@@ -110,11 +111,11 @@ const categories = [
 ];
 
 const HomePage = () => {
-  // const {
-  //   fetchFeaturedProducts,
-  //   products,
-  //   isLoading,
-  // } = useProductStore();
+  const {
+    fetchFeaturedProducts,
+    products,
+    isLoading,
+  } = useProductStore();
 
   // useEffect(() => {
   //   fetchFeaturedProducts();
@@ -147,7 +148,8 @@ const HomePage = () => {
         {/* Category Grid */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((category) => (
-            <div
+            <Link
+              to={category.href}
               key={category.name}
               className="group overflow-hidden rounded-2xl border border-gray-800 bg-gray-900/70 transition duration-300 hover:-translate-y-2 hover:border-emerald-500/60 hover:shadow-lg hover:shadow-emerald-500/10"
             >
@@ -171,7 +173,7 @@ const HomePage = () => {
                   Explore now
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
@@ -182,6 +184,84 @@ const HomePage = () => {
         )}
         */}
       </div>
+      {/* Compact Responsive Footer */}
+<footer className="mt-16 border-t border-gray-700 bg-[#111827] px-3 py-6 text-gray-400 sm:px-6 sm:py-8">
+  <div className="mx-auto max-w-6xl">
+
+    {/* Footer Main Content */}
+    <div className="flex items-start justify-between gap-4 text-[10px] sm:gap-8 sm:text-xs md:text-sm">
+
+      {/* Brand */}
+      <div className="min-w-0 flex-1">
+        <h3 className="text-sm font-bold text-emerald-400 sm:text-base md:text-lg">
+          Nexora
+        </h3>
+
+        <p className="mt-1 whitespace-nowrap">
+          Shop smart. Live better.
+        </p>
+      </div>
+
+      {/* Explore */}
+      <div className="min-w-0 flex-1">
+        <h3 className="mb-2 font-semibold text-white">
+          Explore
+        </h3>
+
+        <div className="space-y-1">
+          <Link to="/" className="block whitespace-nowrap hover:text-emerald-400">
+            Categories
+          </Link>
+
+          <Link to="/" className="block whitespace-nowrap hover:text-emerald-400">
+            New Arrivals
+          </Link>
+
+          <Link to="/" className="block whitespace-nowrap hover:text-emerald-400">
+            Featured
+          </Link>
+        </div>
+      </div>
+
+      {/* Support */}
+      <div className="min-w-0 flex-1">
+        <h3 className="mb-2 font-semibold text-white">
+          Support
+        </h3>
+
+        <div className="space-y-1">
+          <Link to="/" className="block whitespace-nowrap hover:text-emerald-400">
+            Help Center
+          </Link>
+
+          <Link to="/" className="block whitespace-nowrap hover:text-emerald-400">
+            Contact Us
+          </Link>
+
+          <Link to="/" className="block whitespace-nowrap hover:text-emerald-400">
+            Privacy
+          </Link>
+        </div>
+      </div>
+    </div>
+
+    {/* Centered Bottom Bar */}
+    <div className="mt-6 border-t border-gray-700 pt-4 text-center text-[10px] sm:mt-8 sm:pt-5 sm:text-xs md:text-sm">
+      <div className="flex items-center justify-center gap-2 whitespace-nowrap">
+        <span>
+          © {new Date().getFullYear()} Nexora
+        </span>
+
+        <span className="text-gray-600">|</span>
+
+        <span>
+          Made for better shopping.
+        </span>
+      </div>
+    </div>
+
+  </div>
+</footer>
     </div>
   );
 };
