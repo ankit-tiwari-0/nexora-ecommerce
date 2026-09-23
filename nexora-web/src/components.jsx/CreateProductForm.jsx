@@ -1,10 +1,8 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { PlusCircle, Upload, Loader } from "lucide-react";
 
-// Product store is not created yet.
-// import { useProductStore } from "../stores/useProductStore";
+import { useProductStore } from "../stores/useProductStore";
 
 const categories = [
   "Accessories",
@@ -40,10 +38,7 @@ const initialProduct = {
 const CreateProductForm = () => {
   const [newProduct, setNewProduct] = useState(initialProduct);
 
-  // Product store is not created yet.
-  // const { createProduct, loading } = useProductStore();
-
-  const loading = false;
+  const { createProduct, loading } = useProductStore();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,18 +49,21 @@ const CreateProductForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Product data:", {
+    const productData = {
       ...newProduct,
       price: Number(newProduct.price),
-    });
+    };
 
-    // Connect the product store later.
-    // await createProduct(newProduct);
+    try {
+      await createProduct(productData);
 
-    setNewProduct(initialProduct);
+      setNewProduct(initialProduct);
+    } catch (error) {
+      console.error("Error creating product:", error);
+    }
   };
 
   const handleImageChange = (e) => {
