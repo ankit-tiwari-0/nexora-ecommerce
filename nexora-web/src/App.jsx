@@ -33,7 +33,7 @@ const App = () => {
         <Route path='/' element={<HomePage />} />
         <Route path='/signup' element={!user ? <SignupPage /> : <Navigate to='/' />} />
         <Route path='/login' element={!user ? <LoginPage /> : <Navigate to='/' />} />
-        <Route path='/secret-dash' element={!user?.role === "admin" ? <AdminPage /> : <Navigate to='/login' />} />
+        <Route path='/secret-dashboard' element={user?.role === "admin" ? <AdminPage /> : <Navigate to='/login' />} />
       </Routes>
       </div>
       <Toaster />
