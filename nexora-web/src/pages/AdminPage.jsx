@@ -11,7 +11,7 @@ import {
 
 // Uncomment these imports when you create the components
 import CreateProductForm from "../components.jsx/CreateProductForm";
-import ProductsList from "../components.jsx/ProductsList ";
+import ProductsList from "../components.jsx/ProductsList";
 import AnalyticsTab from "../components.jsx/AnalyticsTab";
 const tabs = [
   {

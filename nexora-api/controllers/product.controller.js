@@ -2,14 +2,21 @@ import PRODUCT from "../models/product.model.js"
 import { redis } from "../lib/redis.js";
 import imageKit from "../lib/imagekit.js";
 
-export const getAllproduct = async(req, res)=>{
-    try {
-        const products = await PRODUCT.find({}); 
-        res.json()
-    } catch (error) {
-        
-    }
-}
+export const getAllproduct = async (req, res) => {
+  try {
+    const products = await PRODUCT.find({});
+
+    res.status(200).json({
+      products,
+    });
+  } catch (error) {
+    console.error("Get all products error:", error.message);
+
+    res.status(500).json({
+      message: "Failed to fetch products",
+    });
+  }
+};
 
 export const  getFeaturedProduct = async (req, res) => {
     
