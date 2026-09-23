@@ -1,37 +1,56 @@
-import express, { json } from "express"
-import dotenv from "dotenv"
-import Authroute from "./routes/auth.route.js"
-import { ConnectDB } from "./lib/db.js"
-import cookieParser from "cookie-parser"
-import productRoute from "./routes/product.route.js"
-import cartRoute from "./routes/cart.route.js"  
-import coupon_router from "./routes/coupon.route.js"
-import PAYMENT from "./routes/payment.route.js"
-import cors from "cors"
 
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 
-dotenv.config()
-const app = express()
+import { ConnectDB } from "./lib/db.js";
+
+import Authroute from "./routes/auth.route.js";
+import productRoute from "./routes/product.route.js";
+import cartRoute from "./routes/cart.route.js";
+import coupon_router from "./routes/coupon.route.js";
+import PAYMENT from "./routes/payment.route.js";
+import analytic_route from "./routes/analytics.route.js";
+
+dotenv.config();
+
+const app = express();
+
+const PORT = process.env.PORT || 5000;
+
 // CORS configuration
 app.use(
-    cors({
-        origin: "http://localhost:5173",
-        credentials: true,
-    })
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
 );
-const PORT = process.env.PORT|| 5000
 
-app.use(json())
-app.use(cookieParser())
+// Middlewares
+app.use(express.json());
+app.use(cookieParser());
 
-app.use("/api/auth", Authroute)
-app.use("/api/product", productRoute   )
-app.use("/api/cart", cartRoute  )
-app.use("/api/coupon", coupon_router  )
-app.use("/api/pay", PAYMENT )
+// Routes
+app.use("/api/auth", Authroute);
+app.use("/api/product", productRoute);
+app.use("/api/cart", cartRoute);
+app.use("/api/coupon", coupon_router);
+app.use("/api/pay", PAYMENT);
+app.use("/api/analytics", analytic_route);
 
+// Start server
+const startServer = async () => {
+  try {
+    await ConnectDB();
 
-app.listen(PORT, ()=>{
-    console.log(`server is running on  ${PORT}`);
-    ConnectDB()
-})
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Database connection failed:", error.message);
+    process.exit(1);
+  }
+};
+
+startServer();
