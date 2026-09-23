@@ -15,7 +15,7 @@ const categories = [
   {
     href: "/category/arts-crafts",
     name: "Arts & Crafts",
-    imageUrl: "/Arts%20%26%20Crafts.jpg",
+    imageUrl: "/Arts & Crafts.jpg",
   },
   {
     href: "/category/baby-products",
@@ -70,7 +70,7 @@ const categories = [
   {
     href: "/category/home-living",
     name: "Home & Living",
-    imageUrl: "/Home%20%26%20Living.jpg",
+    imageUrl: "/Home & Living.jpg",
   },
   {
     href: "/category/jewelry",
