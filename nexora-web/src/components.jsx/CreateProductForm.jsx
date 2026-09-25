@@ -25,6 +25,7 @@ const categories = [
   "Snacks",
   "Sport",
   "Travel",
+  "Sin products"
 ];
 
 const initialProduct = {

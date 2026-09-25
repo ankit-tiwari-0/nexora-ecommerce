@@ -4,14 +4,18 @@ import { Link } from "react-router-dom";
 import { useProductStore } from "../stores/useProductStore";
 
 import { useEffect } from "react";
-import CategoryItem from "../components.jsx/CategoryItem";
-import FeaturedProducts from "../components/FeaturedProducts";
+import FeaturedProducts from "../components.jsx/FeaturedProducts";
 
 const categories = [
   {
     href: "/category/accessories",
     name: "Accessories",
     imageUrl: "/Accessories.jpg",
+  },
+  {
+    href: "/category/Sin products",
+    name: "Sin products",
+    imageUrl: "/Sin products.jpg",
   },
   {
     href: "/category/arts-crafts",
@@ -177,7 +181,6 @@ const HomePage = () => {
           ))}
         </div>
 
-        {/* Featured Products: Add later */}
         
         {!isLoading && products.length > 0 && (
           <FeaturedProducts featuredProducts={products} />
