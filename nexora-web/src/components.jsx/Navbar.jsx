@@ -14,8 +14,8 @@ const Navbar = () => {
         <header className="fixed top-0 left-0 w-full bg-gray-900 bg-opacity-90 backdrop-blur-md shadow-lg z-40 transition-all duration-300 border-b border-emerald-800">
             <div className="container mx-auto px-4 py-3">
                 <div className="flex flex-wrap justify-between items-center">
-                   
-                        <AnimatedLogo />
+
+                    <AnimatedLogo />
 
                     <nav className="flex flex-wrap items-center gap-2.5 sm:gap-3 lg:gap-8 mt-4 lg:mt-0 sm:mt-0 ">
                         <Link
@@ -42,15 +42,17 @@ const Navbar = () => {
 
                                 {/* Cart item count commented out until cart store is created */}
 
-                                {
-                {cart.length > 0 && (
-                  <span
-                    className="absolute -top-2 -left-2 bg-emerald-500 text-white rounded-full px-2 py-0.5 text-xs group-hover:bg-emerald-400 transition duration-300 ease-in-out"
-                  >
-                    {cart.length}
-                  </span>
-                )}
-                }
+                                
+                                    {
+                                        cart.length > 0 && (
+                                            <span
+                                                className="absolute -top-2 -left-2 rounded-full bg-emerald-500 px-2 py-0.5 text-xs text-white transition duration-300 ease-in-out group-hover:bg-emerald-400"
+                                            >
+                                                {cart.length}
+                                            </span>
+                                        )
+                                    }
+                                
                             </Link>
                         )}
 
