@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema(
 
         product: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "PRODUCT",
+          ref: "Product", // ✅ Correct model name
         },
       },
     ],
@@ -54,6 +54,7 @@ userSchema.pre("save", async function () {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
+
 
 // Compare password
 userSchema.methods.comparePassword = async function (password) {

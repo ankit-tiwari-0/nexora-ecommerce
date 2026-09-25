@@ -50,7 +50,7 @@ export const getcartproduct = async (req, res) => {
   try {
     const user = await req.user.populate({
       path: "cartItems.product",
-      model: "PRODUCT",
+      model: "Product",
     });
 
     const cartItems = user.cartItems.map((item) => ({
