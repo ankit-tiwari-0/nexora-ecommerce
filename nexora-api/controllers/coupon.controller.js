@@ -1,35 +1,60 @@
 import Coupon from "../models/coupon.model.js";
 
-export const getCoupon = async(req,res)=>{
-    try {
-        const coupon = await Coupon.findOne({USERiD:req.user._id,isActive:true})
-        res.json(Coupon || null);
-    } catch (error) {
-            res.status(500).json({message: error.message})
+// Get the user's active coupon
+export const getCoupon = async (req, res) => {
+  try {
+    const coupon = await Coupon.findOne({
+      userId: req.user._id,
+      isActive: true,
+    });
+
+    return res.status(200).json(coupon || null);
+  } catch (error) {
+    console.error("Get coupon error:", error.message);
+
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+// Validate coupon
+export const validation = async (req, res) => {
+  try {
+    const { code } = req.body;
+
+    const coupon = await Coupon.findOne({
+      code: code,
+      userId: req.user._id,
+      isActive: true,
+    });
+
+    if (!coupon) {
+      return res.status(404).json({
+        message: "Coupon not found",
+      });
     }
-}
 
-export const validation = async (req,res) => {
-    try {
-        const {code}= req.body;
-        const Coupon = await Coupon.findOne({code:code,USERiD:req.user._id, isActive:true});
+    if (coupon.expirationDate < new Date()) {
+      coupon.isActive = false;
 
-        if (!Coupon) {
-            return res.status(404).json({message: "coupon not found"})
-        }
+      await coupon.save();
 
-        if (Coupon.expirationDate < new Date()) {
-            Coupon.isActive = false;
-            await Coupon.save();
-            return res.status(404).json({message:"Coupon expired"})
-        }
-
-        res.json({
-            message: "Coupon is valid",
-            code: Coupon.code,
-            discountPercentage: Coupon.discountPercentage
-        })
-    } catch (error) {
-            res.status(500).json({message: error.message})
+      return res.status(404).json({
+        message: "Coupon expired",
+      });
     }
-}
+
+    return res.status(200).json({
+      message: "Coupon is valid",
+      code: coupon.code,
+      discountPercentage: coupon.discountPercentage,
+    });
+  } catch (error) {
+    console.error("Validate coupon error:", error.message);
+
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};

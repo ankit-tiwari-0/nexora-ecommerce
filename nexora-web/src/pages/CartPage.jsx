@@ -4,10 +4,10 @@ import { useCartStore } from "../stores/useCartStore";
 import { motion } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
 
-import CartItem from "../components/CartItem";
-import PeopleAlsoBought from "../components/PeopleAlsoBought";
-import OrderSummary from "../components/OrderSummary";
-import GiftCouponCard from "../components/GiftCouponCard";
+import CartItem from "../components.jsx/CartItem";
+import PeopleAlsoBought from "../components.jsx/PeopleAlsoBought";
+import OrderSummary from "../components.jsx/OrderSummary";
+import GiftCouponCard from "../components.jsx/GiftCouponCard";
 
 const CartPage = () => {
   const {
