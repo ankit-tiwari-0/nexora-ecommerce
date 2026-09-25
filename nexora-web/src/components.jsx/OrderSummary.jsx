@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useCartStore } from "../stores/useCartStore";
@@ -10,19 +9,16 @@ import {
   ShoppingBag,
   Tag,
 } from "lucide-react";
-import { loadStripe } from "@stripe/stripe-js";
 import axios from "../lib/axios";
 
-const stripePromise = loadStripe(
-  "pk_test_51KZYccCoOZF2UhtOwdXQl3vcizup20zqKqT9hVUIsVzsdBrhqbUI2fE0ZdEVLdZfeHjeyFXtqaNsyCJCmZWnjNZa00PzMAjlcL"
-);
-
 const OrderSummary = () => {
-  const { total, subtotal, coupon, isCouponApplied, cart } = useCartStore();
+  const { total, subtotal, coupon, isCouponApplied, cart } =
+    useCartStore();
 
   const [isProcessing, setIsProcessing] = useState(false);
 
   const savings = Math.max(0, subtotal - total);
+
   const formattedSubtotal = subtotal.toFixed(2);
   const formattedTotal = total.toFixed(2);
   const formattedSavings = savings.toFixed(2);
@@ -33,12 +29,6 @@ const OrderSummary = () => {
     try {
       setIsProcessing(true);
 
-      const stripe = await stripePromise;
-
-      if (!stripe) {
-        throw new Error("Stripe failed to initialize");
-      }
-
       const res = await axios.post(
         "/payments/create-checkout-session",
         {
@@ -47,15 +37,14 @@ const OrderSummary = () => {
         }
       );
 
-      const session = res.data;
+      const { url } = res.data;
 
-      const result = await stripe.redirectToCheckout({
-        sessionId: session.id,
-      });
-
-      if (result?.error) {
-        console.error("Stripe error:", result.error.message);
+      if (!url) {
+        throw new Error("Stripe Checkout URL is missing");
       }
+
+      // Redirect to Stripe Checkout
+      window.location.href = url;
     } catch (error) {
       console.error(
         "Payment error:",
@@ -68,7 +57,7 @@ const OrderSummary = () => {
 
   return (
     <motion.div
-      className="relative overflow-hidden rounded-3xl border border-white/10 .bg-gradient-to-br from-gray-900 via-gray-900 to-emerald-950/40 p-5 shadow-2xl shadow-black/20 sm:p-7"
+      className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-gray-900 via-gray-900 to-emerald-950/40 p-5 shadow-2xl shadow-black/20 sm:p-7"
       initial={{ opacity: 0, y: 25 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -88,6 +77,7 @@ const OrderSummary = () => {
               <h2 className="text-xl font-bold tracking-tight text-white">
                 Order Summary
               </h2>
+
               <p className="mt-0.5 text-xs text-gray-400">
                 Review your purchase
               </p>
@@ -118,7 +108,11 @@ const OrderSummary = () => {
               animate={{ opacity: 1, x: 0 }}
             >
               <span className="flex items-center gap-2 text-sm text-gray-400">
-                <Tag size={15} className="text-emerald-400" />
+                <Tag
+                  size={15}
+                  className="text-emerald-400"
+                />
+
                 You save
               </span>
 
@@ -190,11 +184,13 @@ const OrderSummary = () => {
           {isProcessing ? (
             <>
               <span className="h-5 w-5 animate-spin rounded-full border-2 border-gray-950/30 border-t-gray-950" />
+
               Processing...
             </>
           ) : (
             <>
               Proceed to Checkout
+
               <ArrowRight size={18} />
             </>
           )}
@@ -202,7 +198,11 @@ const OrderSummary = () => {
 
         {/* Security message */}
         <div className="mt-4 flex items-center justify-center gap-2 text-xs text-gray-500">
-          <LockKeyhole size={14} className="text-emerald-500" />
+          <LockKeyhole
+            size={14}
+            className="text-emerald-500"
+          />
+
           Secure checkout powered by Stripe
         </div>
 

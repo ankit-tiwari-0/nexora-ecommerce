@@ -5,6 +5,6 @@ import { checkoutSuccess, createCheckoutSession } from "../controllers/payment.c
 const PAYMENT = Router()
 
 PAYMENT.post("/create-checkout-session", protectRoute, createCheckoutSession)
-PAYMENT.post("/create-checkout-session", protectRoute, checkoutSuccess)
+PAYMENT.post("/checkout-success", protectRoute, checkoutSuccess)
 
 export default PAYMENT

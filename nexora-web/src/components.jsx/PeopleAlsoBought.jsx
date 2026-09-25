@@ -52,7 +52,7 @@ const PeopleAlsoBought = () => {
       initial={{ opacity: 0, y: 25 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="relative mt-10 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-gray-900 via-gray-900 to-emerald-950/20 p-5 shadow-2xl shadow-black/10 sm:p-7"
+      className="relative mt-10 overflow-hidden rounded-3xl border border-white/10 .bg-gradient-to-br from-gray-900 via-gray-900 to-emerald-950/20 p-5 shadow-2xl shadow-black/10 sm:p-7"
     >
       {/* Decorative glow */}
       <div className="pointer-events-none absolute -left-24 -top-24 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl" />

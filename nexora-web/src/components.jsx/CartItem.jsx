@@ -20,7 +20,7 @@ const CartItem = ({ item }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.3 }}
-      className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-gray-900 via-gray-900 to-emerald-950/20 p-4 shadow-xl shadow-black/10 transition-all duration-300 hover:border-emerald-500/20 sm:p-5"
+      className="group relative overflow-hidden rounded-3xl border border-white/10 .bg-gradient-to-br from-gray-900 via-gray-900 to-emerald-950/20 p-4 shadow-xl shadow-black/10 transition-all duration-300 hover:border-emerald-500/20 sm:p-5"
     >
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
         {/* Product image */}
