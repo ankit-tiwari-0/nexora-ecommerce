@@ -18,29 +18,40 @@ export const getAllproduct = async (req, res) => {
   }
 };
 
-export const  getFeaturedProduct = async (req, res) => {
-    
-    try {
-        let featuredProducts = await redis.get("feature_products");
-        if (featuredProducts) {
-            return res.json(JSON.parse(featuredProducts))
-        }
+export const getFeaturedProduct = async (req, res) => {
+  try {
+    const CACHE_KEY = "featured_products";
 
-       featuredProducts = await PRODUCT.find({isFeatured:true}).lean() 
+    // Check Redis cache
+    const cachedProducts = await redis.get(CACHE_KEY);
 
-       if (!featuredProducts) {
-        return res.status(400).json({message: "NO featured products found "})
-       }
-
-       await redis.set("feature_products",  JSON.stringify(featuredProducts));
-
-       res.json(featuredProducts)
-    } catch (error) {
-            console.log(error.message);
-            res.status(500).json({message:"server error", ero:error.message})
-
+    if (cachedProducts) {
+      return res.status(200).json(JSON.parse(cachedProducts));
     }
-}
+
+    // Fetch from MongoDB
+    const featuredProducts = await PRODUCT.find({
+      isFeatured: true,
+    }).lean();
+
+    // Save latest products in Redis
+    await redis.set(
+      CACHE_KEY,
+      JSON.stringify(featuredProducts)
+    );
+
+    return res.status(200).json(featuredProducts);
+  } catch (error) {
+    console.error(
+      "Get featured products error:",
+      error.message
+    );
+
+    return res.status(500).json({
+      message: "Failed to fetch featured products",
+    });
+  }
+};
 
 export const  createProduct = async(req, res) =>{
      
