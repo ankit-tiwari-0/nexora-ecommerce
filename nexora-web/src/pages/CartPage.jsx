@@ -330,7 +330,7 @@ export default CartPage;
 const EmptyCartUI = () => {
   return (
     <motion.div
-      className="flex min-h-[460px] flex-col items-center justify-center rounded-2xl border border-gray-700 bg-gray-800/40 px-6 py-16 text-center shadow-xl"
+      className="flex .min-h-[460px] flex-col items-center justify-center rounded-2xl border border-gray-700 bg-gray-800/40 px-6 py-16 text-center shadow-xl"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
