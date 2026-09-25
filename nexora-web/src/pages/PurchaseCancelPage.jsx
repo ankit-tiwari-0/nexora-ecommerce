@@ -105,7 +105,7 @@ const PurchaseCancelPage = () => {
             >
               <Link
                 to="/cart"
-                className="w-full rounded-xl bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-semibold py-3.5 px-5 flex items-center justify-center gap-2 transition-all duration-300 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 hover:-translate-y-0.5"
+                className="w-full rounded-xl .bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-400 hover:to-red-400 text-white font-semibold py-3.5 px-5 flex items-center justify-center gap-2 transition-all duration-300 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 hover:-translate-y-0.5"
               >
                 <RefreshCcw size={18} />
                 Return to Cart

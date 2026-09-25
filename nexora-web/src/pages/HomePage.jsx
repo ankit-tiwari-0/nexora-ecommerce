@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 import { useProductStore } from "../stores/useProductStore";
 
-// import { useEffect } from "react";
-// import CategoryItem from "../components/CategoryItem";
-// import FeaturedProducts from "../components/FeaturedProducts";
+import { useEffect } from "react";
+import CategoryItem from "../components.jsx/CategoryItem";
+import FeaturedProducts from "../components/FeaturedProducts";
 
 const categories = [
   {
@@ -117,9 +117,9 @@ const HomePage = () => {
     isLoading,
   } = useProductStore();
 
-  // useEffect(() => {
-  //   fetchFeaturedProducts();
-  // }, [fetchFeaturedProducts]);
+  useEffect(() => {
+    fetchFeaturedProducts();
+  }, [fetchFeaturedProducts]);
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-gray-950 text-white">
@@ -178,11 +178,11 @@ const HomePage = () => {
         </div>
 
         {/* Featured Products: Add later */}
-        {/*
+        
         {!isLoading && products.length > 0 && (
           <FeaturedProducts featuredProducts={products} />
         )}
-        */}
+       
       </div>
       {/* Compact Responsive Footer */}
 <footer className="mt-16 border-t border-gray-700 bg-[#111827] px-3 py-6 text-gray-400 sm:px-6 sm:py-8">

@@ -32,7 +32,7 @@ const GiftCouponCard = () => {
     if (coupon) {
       setUserInputCode(coupon.code);
     }
-  }, [coupon]);
+  }, [coupon]); 
 
   const handleApplyCoupon = async () => {
     const code = userInputCode.trim();

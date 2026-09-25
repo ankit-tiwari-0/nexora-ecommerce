@@ -57,7 +57,7 @@ const OrderSummary = () => {
 
   return (
     <motion.div
-      className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-gray-900 via-gray-900 to-emerald-950/40 p-5 shadow-2xl shadow-black/20 sm:p-7"
+      className="relative overflow-hidden rounded-3xl border border-white/10 .bg-gradient-to-br from-gray-900 via-gray-900 to-emerald-950/40 p-5 shadow-2xl shadow-black/20 sm:p-7"
       initial={{ opacity: 0, y: 25 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}

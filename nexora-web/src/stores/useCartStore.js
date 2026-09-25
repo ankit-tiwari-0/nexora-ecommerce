@@ -29,7 +29,7 @@ export const useCartStore = create((set, get) => ({
     try {
      const response = await axios.post("/coupon/validate", {
   code,
-});
+}); 
 
       set({
         coupon: response.data,
@@ -61,27 +61,34 @@ export const useCartStore = create((set, get) => ({
 
   // Get cart items from backend
   getCartItems: async () => {
-    try {
-      const response = await axios.get("/cart");
+  try {
+    const response = await axios.get("/cart", {
+      withCredentials: true,
+    });
 
-      set({
-        cart: response.data,
-      });
+    const cartItems = response.data.cartItems || [];
 
-      get().calculateTotals();
-    } catch (error) {
-      set({
-        cart: [],
-        subtotal: 0,
-        total: 0,
-      });
+    set({
+      cart: cartItems,
+    });
 
-      toast.error(
-        error.response?.data?.message ||
-          "Failed to fetch cart"
-      );
-    }
-  },
+    get().calculateTotals();
+  } catch (error) {
+    console.error("❌ Fetch cart error:", error);
+    console.error("Status:", error.response?.status);
+    console.error("Response:", error.response?.data);
+
+    set({
+      cart: [],
+      subtotal: 0,
+      total: 0,
+    });
+
+    toast.error(
+      error.response?.data?.message || "Failed to fetch cart"
+    );
+  }
+},
 
   // Clear entire cart
   clearCart: async () => {
