@@ -164,9 +164,9 @@ const FeaturedProducts = ({ featuredProducts = [] }) => {
               return (
                 <div
                   key={product._id}
-                  className="w-full flex-shrink-0 px-2 sm:w-1/2 lg:w-1/3 xl:w-1/4"
+                  className="w-full .flex-shrink-0 px-2 sm:w-1/2 lg:w-1/3 xl:w-1/4"
                 >
-                  <article className="group relative h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.04] shadow-xl shadow-black/10 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-emerald-500/40 hover:bg-white/[0.07]">
+                  <article className="group relative h-full overflow-hidden rounded-3xl border border-white/10 .bg-white/[0.04] shadow-xl shadow-black/10 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-emerald-500/40 hover:bg-white/[0.07]">
 
                     {/* Product Image */}
                     <div className="relative overflow-hidden bg-gray-900">
@@ -187,13 +187,13 @@ const FeaturedProducts = ({ featuredProducts = [] }) => {
                         className="h-60 w-full object-cover transition duration-700 ease-out group-hover:scale-110"
                       />
 
-                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-gray-950/70 to-transparent" />
+                      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 .bg-gradient-to-t from-gray-950/70 to-transparent" />
                     </div>
 
                     {/* Product Details */}
-                    <div className="flex min-h-[205px] flex-col p-5">
+                    <div className="flex .min-h-[205px] flex-col p-5">
 
-                      <h3 className="line-clamp-2 min-h-[48px] text-base font-bold leading-6 text-white transition-colors duration-300 group-hover:text-emerald-400">
+                      <h3 className="line-clamp-2 .min-h-[48px] text-base font-bold leading-6 text-white transition-colors duration-300 group-hover:text-emerald-400">
                         {product.name}
                       </h3>
 
