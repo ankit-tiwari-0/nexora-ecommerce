@@ -17,8 +17,6 @@ const ProductCard = ({ product }) => {
     }
 
     await addToCart(product);
-
-    toast.success("Cart functionality coming soon!");
   };
 
   return (

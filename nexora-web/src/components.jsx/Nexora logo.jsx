@@ -21,7 +21,7 @@ const AnimatedLogo = () => {
       </motion.span>
 
       <motion.span
-        className="relative bg-[linear-gradient(90deg,#10b981,#34d399,#a7f3d0,#10b981)] bg-[length:300%_100%] bg-clip-text text-2xl font-black text-transparent"
+        className="relative bg-[linear-gradient(90deg,#10b981,#34d399,#a7f3d0,#10b981)] .bg-[length:300%_100%] bg-clip-text text-2xl font-black text-transparent"
         animate={{
           backgroundPosition: ["0% 50%", "300% 50%"],
         }}
