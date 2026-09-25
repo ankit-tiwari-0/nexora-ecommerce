@@ -1,6 +1,7 @@
 import { ShoppingCart, UserPlus, LogIn, LogOut, Lock, House } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useUserStore } from "../stores/useUserstore.js";
+import AnimatedLogo from "./Nexora logo.jsx";
 // import { useCartStore } from "../stores/useCartStore";
 
 const Navbar = () => {
@@ -17,7 +18,7 @@ const Navbar = () => {
                         to="/"
                         className="text-2xl font-bold text-emerald-400 items-center space-x-2 flex"
                     >
-                        Nexora
+                        <AnimatedLogo />
                     </Link>
 
                     <nav className="flex flex-wrap items-center gap-2.5 sm:gap-3 lg:gap-8 mt-4 lg:mt-0 sm:mt-0 ">
