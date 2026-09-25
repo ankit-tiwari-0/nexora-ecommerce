@@ -82,7 +82,7 @@ const CategoryPage = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
-            className="flex min-h-[350px] flex-col items-center justify-center rounded-2xl border border-dashed border-gray-700 bg-gray-800/30 px-6 text-center"
+            className="flex .min-h-[350px] flex-col items-center justify-center rounded-2xl border border-dashed border-gray-700 bg-gray-800/30 px-6 text-center"
           >
             <div className="mb-5 rounded-full bg-gray-800 p-5">
               <PackageSearch
