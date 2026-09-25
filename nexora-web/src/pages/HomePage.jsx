@@ -8,24 +8,14 @@ import FeaturedProducts from "../components.jsx/FeaturedProducts";
 
 const categories = [
   {
-    href: "/category/accessories",
-    name: "Accessories",
-    imageUrl: "/Accessories.jpg",
-  },
-  {
-    href: "/category/Sin products",
-    name: "Sin products",
-    imageUrl: "/Sin products.jpg",
+    href: "/category/medicine",
+    name: "Medicine",
+    imageUrl: "/medi.jpg",
   },
   {
     href: "/category/arts-crafts",
     name: "Arts & Crafts",
     imageUrl: "/Arts & Crafts.jpg",
-  },
-  {
-    href: "/category/baby-products",
-    name: "Baby Products",
-    imageUrl: "/baby_products.jpg",
   },
   {
     href: "/category/beauty",
@@ -38,14 +28,24 @@ const categories = [
     imageUrl: "/car_accessories.jpg",
   },
   {
-    href: "/category/designer",
-    name: "Designer",
+    href: "/category/baby-products",
+    name: "Baby Products",
+    imageUrl: "/baby_products.jpg",
+  },
+  {
+    href: "/category/Kitchen Essentials",
+    name: "Kitchen Essentials",
     imageUrl: "/Designer.jpg",
   },
   {
     href: "/category/educational-supplies",
     name: "Educational Supplies",
     imageUrl: "/Educational%20Supplies.jpg",
+  },
+  {
+    href: "/category/Sin products",
+    name: "Sin products",
+    imageUrl: "/Sin products.jpg",
   },
   {
     href: "/category/electronics",

@@ -5,12 +5,12 @@ import { PlusCircle, Upload, Loader } from "lucide-react";
 import { useProductStore } from "../stores/useProductStore";
 
 const categories = [
-  "Accessories",
+  "Medicinee",
   "Arts & Crafts",
   "Baby Products",
   "Beauty",
   "Car Accessories",
-  "Designer",
+  "Kitchen Essentials",
   "Educational Supplies",
   "Electronics",
   "Fashion",
@@ -20,7 +20,7 @@ const categories = [
   "Home & Living",
   "Jewelry",
   "Makeup",
-  "Personal Care Men",
+  "Personal Care Men", // hhh  
   "Pet Supplies",
   "Snacks",
   "Sport",
