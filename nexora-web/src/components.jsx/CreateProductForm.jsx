@@ -9,6 +9,7 @@ const categories = [
   "arts-crafts",
   "beauty",
   "Car Accessories",
+  "baby-products",
   "Kitchen Essentials",
   "Educational Supplies",
   "Electronics",
@@ -19,7 +20,7 @@ const categories = [
   "Home & Living",
   "Jewelry",
   "Makeup",
-  "Personal Care Men", // hhh  
+  "Personal Care Men",
   "Pet Supplies",
   "Snacks",
   "Sport",
