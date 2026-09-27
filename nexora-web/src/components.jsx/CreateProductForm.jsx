@@ -5,27 +5,27 @@ import { PlusCircle, Upload, Loader } from "lucide-react";
 import { useProductStore } from "../stores/useProductStore";
 
 const categories = [
-  "Medicine",
+  "medicine",
   "arts-crafts",
   "beauty",
-  "Car Accessories",
+  "car-accessories",
   "baby-products",
-  "Kitchen Essentials",
-  "Educational Supplies",
-  "Electronics",
-  "Fashion",
-  "Fragrances",
-  "Groceries",
-  "Hair Care",
-  "Home & Living",
-  "Jewelry",
-  "Makeup",
-  "Personal Care Men",
-  "Pet Supplies",
-  "Snacks",
-  "Sport",
-  "Travel",
-  "Sin products"
+  "kitchen-essentials",
+  "educational-supplies",
+  "electronics",
+  "fashion",
+  "fragrances",
+  "groceries",
+  "hair-care",
+  "home-living",
+  "jewelry",
+  "makeup",
+  "personal-care-men",
+  "pet-supplies",
+  "snacks",
+  "sport",
+  "travel",
+  "sin-products"
 ];
 
 const initialProduct = {
