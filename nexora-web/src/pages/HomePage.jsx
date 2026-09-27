@@ -33,7 +33,7 @@ const categories = [
     imageUrl: "/baby_products.jpg",
   },
   {
-    href: "/category/Kitchen Essentials",
+    href: "/category/Kitchen-essentials",
     name: "Kitchen Essentials",
     imageUrl: "/Designer.jpg",
   },
@@ -43,7 +43,7 @@ const categories = [
     imageUrl: "/Educational%20Supplies.jpg",
   },
   {
-    href: "/category/Sin products",
+    href: "/category/Sin-products",
     name: "Sin products",
     imageUrl: "/Sin products.jpg",
   },
