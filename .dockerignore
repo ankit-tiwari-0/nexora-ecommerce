@@ -1,0 +1,12 @@
+nexora-api/node_modules
+nexora-web/node_modules
+
+nexora-web/dist
+
+.git
+.gitignore
+
+.env
+.env.*
+
+npm-debug.log

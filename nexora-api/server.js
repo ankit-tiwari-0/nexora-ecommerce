@@ -1,8 +1,9 @@
-
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import path from "path";
+import { fileURLToPath } from "url";
 
 import { ConnectDB } from "./lib/db.js";
 
@@ -19,15 +20,25 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-// CORS configuration
+// Get current directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// ==============================
+// CORS
+// ==============================
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
     credentials: true,
   })
 );
 
+// ==============================
 // Middlewares
+// ==============================
+
 app.use(express.json({ limit: "10mb" }));
 
 app.use(
@@ -36,9 +47,13 @@ app.use(
     limit: "10mb",
   })
 );
+
 app.use(cookieParser());
 
-// Routes
+// ==============================
+// API Routes
+// ==============================
+
 app.use("/api/auth", Authroute);
 app.use("/api/product", productRoute);
 app.use("/api/cart", cartRoute);
@@ -46,16 +61,40 @@ app.use("/api/coupon", coupon_router);
 app.use("/api/payments", PAYMENT);
 app.use("/api/analytics", analytic_route);
 
-// Start server
+// ==============================
+// Serve React Frontend
+// ==============================
+
+const frontendPath = path.join(__dirname, "public");
+
+app.use(express.static(frontendPath));
+
+// React Router fallback
+app.use((req, res, next) => {
+  if (req.method !== "GET" || req.path.startsWith("/api")) {
+    return next();
+  }
+
+  res.sendFile(path.join(frontendPath, "index.html"));
+});
+
+// ==============================
+// Start Server
+// ==============================
+
 const startServer = async () => {
   try {
     await ConnectDB();
 
-    app.listen(PORT, () => {
+    app.listen(PORT, "0.0.0.0", () => {
       console.log(`Server is running on port ${PORT}`);
     });
   } catch (error) {
-    console.error("Database connection failed:", error.message);
+    console.error(
+      "Database connection failed:",
+      error.message
+    );
+
     process.exit(1);
   }
 };
